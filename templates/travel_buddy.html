@@ -1,0 +1,203 @@
+{% extends 'base.html' %}
+
+{% block title %}
+
+Travel Buddy Matching
+
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5 mb-5">
+
+    <div class="card shadow-lg border-0">
+
+        <div class="card-header bg-primary text-white text-center">
+
+            <h2>Travel Buddy Matching</h2>
+
+            <p class="mb-0">Find a travel partner with similar interests.</p>
+
+        </div>
+
+        <div class="card-body">
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+                <div class="row">
+
+                    <div class="col-md-6 mb-3">
+
+                        <label class="form-label">Destination</label>
+
+                        {{ form.destination }}
+
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+
+                        <label class="form-label">Travel Date</label>
+
+                        {{ form.travel_date }}
+
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+
+                        <label class="form-label">Budget (₹)</label>
+
+                        {{ form.budget }}
+
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+
+                        <label class="form-label">Interest</label>
+
+                        {{ form.interest }}
+
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+
+                        <label class="form-label">Phone Number</label>
+
+                        {{ form.phone }}
+
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+
+                        <label class="form-label">Email</label>
+
+                        {{ form.email }}
+
+                    </div>
+
+                    <div class="col-12 mb-3">
+
+                        <label class="form-label">About Yourself</label>
+
+                        {{ form.about }}
+
+                    </div>
+
+                </div>
+
+                <div class="text-center">
+
+                    <button type="submit" class="btn btn-success px-5">Find Buddy</button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <br>
+    
+    <br>
+
+    {% if buddies %}
+
+    <h2 class="text-center mb-4">Matching Travel Buddies</h2>
+
+    <div class="row">
+
+        {% for buddy in buddies %}
+
+        <div class="col-lg-6 mb-4">
+
+            <div class="card shadow h-100">
+
+                <div class="card-body">
+
+                    <h4 class="text-primary">{{ buddy.user.username }}</h4>
+
+                    <hr>
+
+                    <p>
+
+                        <strong>Destination :</strong>
+
+                        {{ buddy.destination.destination_name }}
+
+                    </p>
+
+                    <p>
+
+                        <strong>Travel Date :</strong>
+
+                        {{ buddy.travel_date }}
+
+                    </p>
+
+                    <p>
+
+                        <strong>Budget :</strong>
+
+                        ₹{{ buddy.budget }}
+
+                    </p>
+
+                    <p>
+
+                        <strong>Interest :</strong>
+
+                        {{ buddy.interest }}
+
+                    </p>
+
+                    <p>
+
+                        <strong>About :</strong>
+
+                        {{ buddy.about }}
+
+                    </p>
+
+                    <p>
+
+                        <strong>Phone :</strong>
+
+                        {{ buddy.phone }}
+
+                    </p>
+
+                    <p>
+
+                        <strong>Email :</strong>
+
+                        {{ buddy.email }}
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    {% elif request.method == "POST" %}
+
+    <div class="alert alert-warning mt-5 text-center">
+
+        <h5>No matching travel buddies found.</h5>
+
+        <p>Try another destination or interest.</p>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

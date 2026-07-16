@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+
+{% block title %}
+
+Travel Goal
+
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5 mb-5">
+
+    <div class="text-center mb-5">
+
+        <h2>My Travel Goal</h2>
+
+        <p>Complete 2 International Trips and Claim 1 FREE International Trip.</p>
+
+    </div>
+
+    <div class="card shadow mb-5">
+
+        <div class="card-body">
+
+            <h4 class="text-center">Goal Progress</h4>
+
+            <br>
+
+            <div class="progress" style="height:30px;">
+
+                <div class="progress-bar bg-success"
+
+                     style="width:{{ progress }}%;">
+
+                    {{ completed_count }}/2
+
+                </div>
+
+            </div>
+
+            <br>
+
+            {% if reward %}
+
+                <div class="alert alert-success text-center">
+
+                    🎉 Congratulations!
+
+                    You have completed your goal.
+
+                </div>
+
+                <button class="btn btn-success w-100">Claim FREE International Trip</button>
+
+            {% elif completed_count == 1 %}
+
+                <div class="alert alert-info text-center">
+
+                    You completed 1 International Trip.
+
+                    Complete one more trip.
+
+                </div>
+
+            {% else %}
+
+                <div class="alert alert-warning text-center">
+
+                    No completed International Trips yet.
+
+                </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+    <div class="card shadow">
+
+        <div class="card-header bg-primary text-white">
+
+            <h4>Completed Trips</h4>
+
+        </div>
+
+        <div class="card-body">
+
+            {% if completed_trips %}
+
+            <table class="table table-bordered">
+
+                <tr>
+
+                    <th>Destination</th>
+
+                    <th>Package</th>
+
+                    <th>Status</th>
+
+                </tr>
+
+                {% for trip in completed_trips %}
+
+                <tr>
+
+                    <td>{{ trip.destination.destination_name }}</td>
+
+                    <td>{{ trip.destination.package.package_name }}</td>
+
+                    <td>{{ trip.status }}</td>
+
+                </tr>
+
+                {% endfor %}
+
+            </table>
+
+            {% else %}
+
+            <h5 class="text-center">No completed trips available.</h5>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

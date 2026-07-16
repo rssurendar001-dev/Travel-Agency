@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+
+Packages
+
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5 mb-5">
+
+    <div class="text-center mb-5">
+
+        <h1 class="fw-bold">Our Travel Packages</h1>
+
+        <p class="text-muted">Choose your favorite travel package and start your next adventure.</p>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-lg-6 mb-4">
+
+            <div class="card shadow package-card h-100">
+
+                <img src="{% static 'images/India-Tour-Packages.webp' %}" class="card-img-top package-image">
+
+                <div class="card-body">
+
+                    <h3>India Package</h3>
+
+                    <p>Explore the beauty of India with our specially designed tour packages.</p>
+
+                    <h5 class="text-success">Starting From ₹24,999</h5>
+
+                    <a href="{% url 'destinations' 'India' %}" class="btn btn-primary">Explore Destinations</a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-lg-6 mb-4">
+
+            <div class="card shadow package-card h-100">
+
+                <img src="{% static 'images/International-Tour-Packages.webp' %}" class="card-img-top package-image">
+
+                <div class="card-body">
+
+                    <h3>International Package</h3>
+
+                    <p>Visit the world's most beautiful countries and create unforgettable memories.</p>
+
+                    <h5 class="text-success">Starting From ₹54,999</h5>
+
+                    <a href="{% url 'destinations' 'International' %}" class="btn btn-primary">Explore Destinations</a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-lg-6 mb-4">
+
+            <div class="card shadow package-card h-100">
+
+                <img src="{% static 'images/Europe-Tour-Packages.webp' %}" class="card-img-top package-image">
+
+                <div class="card-body">
+
+                    <h3>Europe Package</h3>
+
+                    <p>Experience the beauty of famous European countries with our premium tour package.</p>
+
+                    <h5 class="text-success">Starting From ₹84,999</h5>
+
+                    <a href="{% url 'destinations' 'Europe' %}" class="btn btn-primary">Explore Destinations</a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-lg-6 mb-4">
+
+            <div class="card shadow package-card h-100">
+
+                <img src="{% static 'images/International-Honeymoon-Packages.jpg' %}" class="card-img-top package-image">
+
+                <div class="card-body">
+
+                    <h3>International Honeymoon Package</h3>
+
+                    <p>Celebrate your honeymoon in the world's most romantic destinations.</p>
+
+                    <h5 class="text-success">Starting From ₹99,999</h5>
+
+                    <a href="{% url 'destinations' 'Honeymoon' %}" class="btn btn-primary">Explore Destinations</a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

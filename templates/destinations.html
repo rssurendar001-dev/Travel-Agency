@@ -1,0 +1,163 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+
+Destinations
+
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <div class="text-center mb-5">
+
+        <h1>{{ package.package_name }}</h1>
+
+        <p>Choose your favourite destination and send your enquiry.</p>
+
+    </div>
+
+    <!-- SORT -->
+
+    <div class="row justify-content-center mb-5">
+
+        <div class="col-lg-6">
+
+            <div class="card shadow border-0 p-4">
+
+                <h3 class="text-primary fw-bold mb-4">
+
+                    SORT BY
+
+                </h3>
+
+                <form method="GET">
+
+                    <select
+
+                        name="sort"
+
+                        class="form-select form-select-lg"
+
+                        onchange="this.form.submit()">
+
+                        <option value="">Select Option</option>
+
+                        <option value="price_low"
+                        {% if sort == "price_low" %}selected{% endif %}>
+                        Price : Low to High
+                        </option>
+
+                        <option value="price_high"
+                        {% if sort == "price_high" %}selected{% endif %}>
+                        Price : High to Low
+                        </option>
+
+                        <option value="rating"
+                        {% if sort == "rating" %}selected{% endif %}>
+                        Top Rated
+                        </option>
+
+                        <option value="days_low"
+                        {% if sort == "days_low" %}selected{% endif %}>
+                        Duration : Short to Long
+                        </option>
+
+                        <option value="days_high"
+                        {% if sort == "days_high" %}selected{% endif %}>
+                        Duration : Long to Short
+                        </option>
+
+                        <option value="name"
+                        {% if sort == "name" %}selected{% endif %}>
+                        Name A-Z
+                        </option>
+
+                    </select>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- DESTINATIONS -->
+
+    <div class="row">
+
+        {% for destination in destinations %}
+
+        <div class="col-lg-4 col-md-6 mb-4">
+
+            <div class="card h-100 shadow">
+
+                <img src="{{ destination.image.url }}"
+                     class="card-img-top"
+                     style="height:250px;object-fit:cover;">
+
+                <div class="card-body">
+
+                    <h4>
+
+                        {{ destination.destination_name }}
+
+                    </h4>
+
+                    <p>
+
+                        <strong>Duration :</strong>
+
+                        {{ destination.days }} Days
+
+                    </p>
+
+                    <p>
+
+                        <strong>Rating :</strong>
+
+                        {{ destination.rating }} ⭐
+
+                    </p>
+
+                    <p>
+
+                        <strong>Price :</strong>
+
+                        ₹{{ destination.price }}
+
+                    </p>
+
+                    <a href="{% url 'enquiry' destination.id %}"
+
+                       class="btn btn-success w-100">
+
+                        Enquire Now
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% empty %}
+
+        <div class="text-center">
+
+            <h3>No Destinations Available</h3>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}

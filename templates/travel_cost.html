@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+
+{% block title %}
+
+Travel Cost Estimator
+
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5 mb-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-md-7">
+
+            <div class="card shadow">
+
+                <div class="card-header bg-primary text-white text-center">
+
+                    <h2>Travel Cost Estimator</h2>
+
+                </div>
+
+                <div class="card-body">
+
+                    <form method="POST">
+
+                        {% csrf_token %}
+
+                        <div class="mb-3">
+
+                            <label>Destination</label>
+
+                            {{ form.destination }}
+
+                        </div>
+
+                        <div class="mb-3">
+
+                            <label>Number of People</label>
+
+                            {{ form.people }}
+
+                        </div>
+
+                        <div class="mb-3">
+
+                            <label>Hotel Type</label>
+
+                            {{ form.hotel_type }}
+
+                        </div>
+
+                        <div class="mb-3">
+
+                            <label>Number of Days</label>
+
+                            {{ form.days }}
+
+                        </div>
+
+                        <button class="btn btn-success w-100">Estimate Cost</button>
+
+                    </form>
+
+                    {% if total_cost %}
+
+                    <hr>
+
+                    <div class="alert alert-success text-center">
+
+                        <h4>Estimated Total Cost</h4>
+
+                        <h2>₹ {{ total_cost }}</h2>
+
+                    </div>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

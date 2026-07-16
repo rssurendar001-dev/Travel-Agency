@@ -1,0 +1,221 @@
+from django import forms
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+from .models import CurrencyConverter, Enquiry, Blog, Memory, BudgetPlanner, TravelBuddy, TravelCost
+
+class SignupForm(forms.Form):
+
+    username = forms.CharField(max_length=100)
+
+    email = forms.EmailField()
+
+    password = forms.CharField(widget=forms.PasswordInput())
+
+    confirm_password = forms.CharField(widget=forms.PasswordInput())
+
+class EnquiryForm(forms.ModelForm):
+
+    class Meta:
+
+        model = Enquiry
+
+        fields = [
+
+            'destination',
+            
+            'travel_date',
+            
+            'adults',
+            
+            'children',
+            
+            'phone',
+            
+            'email',
+            
+        ]
+
+        widgets = {'travel_date': forms.DateInput(attrs={'type': 'date'})}
+        
+class BlogForm(forms.ModelForm):
+
+    class Meta:
+
+        model = Blog
+
+        fields = [
+
+            'title',
+
+            'destination',
+
+            'image',
+
+            'content',
+            
+        ]   
+
+class MemoryForm(forms.ModelForm):
+
+    class Meta:
+        model = Memory
+        fields = [
+            
+            'album_name', 
+                  
+            'image', 
+                  
+            'caption'
+                  
+        ]
+
+class BudgetPlannerForm(forms.ModelForm):
+
+    class Meta:
+        model = BudgetPlanner
+
+        fields = [
+            
+            'total_budget',
+            
+            'transport',
+            
+            'hotel',
+            
+            'food',
+            
+            'shopping'
+            
+        ]
+        
+class TravelCostForm(forms.ModelForm):
+
+    class Meta:
+
+        model = TravelCost
+
+        fields = [
+
+            'destination',
+
+            'people',
+
+            'hotel_type',
+
+            'days',
+
+        ]
+
+        widgets = {
+
+            'destination': forms.Select(attrs={'class': 'form-control'}),
+
+            'people': forms.NumberInput(attrs={'class': 'form-control','placeholder': 'Enter Number of People'}),
+
+            'hotel_type': forms.Select(attrs={'class': 'form-control'}),
+
+            'days': forms.NumberInput(attrs={'class': 'form-control','placeholder': 'Enter Number of Days'})
+            
+        }
+             
+class TravelBuddyForm(forms.ModelForm):
+
+    class Meta:
+
+        model = TravelBuddy
+
+        fields = [
+
+            'destination',
+
+            'travel_date',
+
+            'budget',
+
+            'interest',
+
+            'about',
+
+            'phone',
+
+            'email',
+
+        ]
+
+        widgets = {
+
+            'travel_date': forms.DateInput(attrs={'type': 'date'}),
+
+            'about': forms.Textarea(attrs={'rows': 4})
+
+        }
+        
+class CurrencyConverterForm(forms.ModelForm):
+
+    class Meta:
+
+        model = CurrencyConverter
+
+        fields = [
+
+            'amount',
+
+            'from_currency',
+
+            'to_currency',
+
+        ]
+
+        widgets = {
+
+            'amount': forms.NumberInput(
+                
+                attrs={
+                    
+                    'class': 'form-control',
+                    
+                    'placeholder': 'Enter Amount'
+                    
+                }
+            ),
+
+            'from_currency': forms.Select(attrs={'class': 'form-select'}),
+
+            'to_currency': forms.Select(attrs={'class': 'form-select'})
+
+        }
+
+class EmailForm(forms.Form):
+
+    email = forms.EmailField(
+        
+        widget=forms.EmailInput(
+            
+            attrs={
+                
+                "class": "form-control",
+                
+                "placeholder": "Enter Email"
+                
+            }
+        )
+    )
+
+
+class OTPForm(forms.Form):
+
+    otp = forms.CharField(
+        
+        max_length=6,
+        
+        widget=forms.TextInput(
+            
+            attrs={
+                
+                "class": "form-control",
+                
+                "placeholder": "Enter OTP"
+                
+            }
+        )
+    )

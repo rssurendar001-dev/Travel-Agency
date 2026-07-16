@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+
+{% block title %}
+
+Travel Blogs
+
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5 mb-5">
+
+    <div class="text-center">
+
+        <h1>Travel Blogs & Memories</h1>
+
+        <p>Share your travel experience with everyone.</p>
+
+    </div>
+
+    <div class="row mt-5">
+
+        <div class="col-lg-4">
+
+            <div class="card shadow">
+
+                <div class="card-header bg-primary text-white">
+
+                    <h4>Share Your Travel Story</h4>
+
+                </div>
+
+                <div class="card-body">
+
+                    <form method="POST" enctype="multipart/form-data">
+
+                        {% csrf_token %}
+
+                        {{ form.as_p }}
+
+                        <button class="btn btn-success">Post Blog</button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-lg-8">
+
+            {% for blog in blogs %}
+
+            <div class="card shadow mb-4">
+
+                <img src="{{ blog.image.url }}" class="card-img-top" style="height:350px; object-fit:cover;">
+
+                <div class="card-body">
+
+                    <h3>{{ blog.title }}</h3>
+
+                    <h6 class="text-muted">{{ blog.destination }}</h6>
+
+                    <p>{{ blog.content }}</p>
+
+                    <small>
+
+                        Posted by
+
+                        <strong>{{ blog.user.username }}</strong>
+
+                        |
+
+                        {{ blog.created_at }}
+
+                    </small>
+
+                </div>
+
+            </div>
+
+            {% empty %}
+
+            <div class="alert alert-info">
+
+                No blogs available.
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

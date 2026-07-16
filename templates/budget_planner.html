@@ -1,0 +1,145 @@
+{% extends 'base.html' %}
+
+{% block title %}
+
+Budget Planner
+
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5 mb-5">
+
+    <div class="text-center mb-4">
+
+        <h1>Trip Budget Planner</h1>
+
+        <p>Plan your trip budget and find packages within your budget.</p>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-6">
+
+            <div class="card shadow">
+
+                <div class="card-header bg-primary text-white">
+
+                    <h4>Budget Details</h4>
+
+                </div>
+
+                <div class="card-body">
+
+                    <form method="POST">
+
+                        {% csrf_token %}
+
+                        <div class="mb-3">
+
+                            <label>Total Budget</label>
+
+                            <input type="number" name="total_budget" class="form-control" required>
+
+                        </div>
+
+                        <div class="mb-3">
+
+                            <label>Transport</label>
+
+                            <input type="number" name="transport" class="form-control" required>
+
+                        </div>
+
+                        <div class="mb-3">
+
+                            <label>Hotel</label>
+
+                            <input type="number" name="hotel" class="form-control" required>
+
+                        </div>
+
+                        <div class="mb-3">
+
+                            <label>Food</label>
+
+                            <input type="number" name="food" class="form-control" required>
+
+                        </div>
+
+                        <div class="mb-3">
+
+                            <label>Shopping</label>
+
+                            <input type="number" name="shopping" class="form-control" required>
+
+                        </div>
+
+                        <button class="btn btn-success">Calculate Budget</button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-6">
+
+            {% if remaining != None %}
+
+            <div class="card shadow">
+
+                <div class="card-header bg-success text-white">
+
+                    <h4>Budget Result</h4>
+
+                </div>
+
+                <div class="card-body">
+
+                    <h5>Remaining Budget : ₹{{ remaining }}</h5>
+
+                    <hr>
+
+                    <h4>Affordable Packages</h4>
+
+                    {% if packages %}
+
+                    <ul>
+
+                        {% for package in packages %}
+
+                        <li>
+
+                            <strong>{{ package.package_name }}</strong>
+
+                            - ₹{{ package.price }}
+
+                        </li>
+
+                        {% endfor %}
+
+                    </ul>
+
+                    {% else %}
+
+                    <p>No package is available within your budget.</p>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
