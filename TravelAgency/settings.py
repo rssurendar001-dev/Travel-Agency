@@ -139,6 +139,6 @@ EMAIL_USE_TLS = True
 
 EMAIL_HOST_USER = "journeymapproject@gmail.com"
 
-EMAIL_HOST_PASSWORD = "xtdx bhmi wzbm kpzq"
+EMAIL_HOST_PASSWORD = "okns tsec wkls feaw"
 
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
