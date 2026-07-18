@@ -13,29 +13,41 @@ class SignupForm(forms.Form):
 
     confirm_password = forms.CharField(widget=forms.PasswordInput())
 
+from django import forms
+from datetime import date
+from .models import Enquiry
+
 class EnquiryForm(forms.ModelForm):
 
     class Meta:
-
         model = Enquiry
-
         fields = [
-
             'destination',
-            
             'travel_date',
-            
             'adults',
-            
             'children',
-            
             'phone',
-            
             'email',
-            
         ]
 
-        widgets = {'travel_date': forms.DateInput(attrs={'type': 'date'})}
+        widgets = {
+            'travel_date': forms.DateInput(
+                attrs={
+                    'type': 'date',
+                    'min': date.today().strftime('%Y-%m-%d')
+                }
+            )
+        }
+
+    def clean_travel_date(self):
+        travel_date = self.cleaned_data['travel_date']
+
+        if travel_date < date.today():
+            raise forms.ValidationError(
+                "Travel date cannot be in the past. Please select today or a future date."
+            )
+
+        return travel_date
         
 class BlogForm(forms.ModelForm):
 

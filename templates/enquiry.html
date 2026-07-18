@@ -52,13 +52,23 @@ Enquiry
                             {{ form.destination }}
 
                         </div>
-
+                        
                         <div class="mb-3">
-
+                            
                             <label class="form-label">Travel Date</label>
-
+                            
                             {{ form.travel_date }}
-
+                            
+                            {% if form.travel_date.errors %}
+                            
+                            <div class="text-danger mt-1">
+                                
+                                {{ form.travel_date.errors }}
+                            
+                            </div>
+                            
+                            {% endif %}
+                        
                         </div>
 
                         <div class="mb-3">
