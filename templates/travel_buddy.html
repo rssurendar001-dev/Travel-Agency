@@ -42,11 +42,15 @@ Travel Buddy Matching
                         
                         {{ form.travel_date }}
                         
-                        <span class="text-danger">
+                        {% if form.travel_date.errors %}
+                        
+                        <div class="text-danger mt-1">
                             
                             {{ form.travel_date.errors }}
                         
-                        </span>
+                        </div>
+                        
+                        {% endif %}
                     
                     </div>
 

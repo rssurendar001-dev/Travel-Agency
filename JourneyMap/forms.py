@@ -132,11 +132,13 @@ class TravelCostForm(forms.ModelForm):
         }
              
 
+from datetime import date
+from django import forms
+
 class TravelBuddyForm(forms.ModelForm):
 
     class Meta:
         model = TravelBuddy
-
         fields = [
             'destination',
             'travel_date',
@@ -151,25 +153,18 @@ class TravelBuddyForm(forms.ModelForm):
             'travel_date': forms.DateInput(
                 attrs={
                     'type': 'date',
-                    'class': 'form-control',
                     'min': date.today().strftime('%Y-%m-%d')
                 }
             ),
-
-            'about': forms.Textarea(
-                attrs={
-                    'rows': 4,
-                    'class': 'form-control'
-                }
-            ),
+            'about': forms.Textarea(attrs={'rows': 4}),
         }
 
     def clean_travel_date(self):
-        travel_date = self.cleaned_data.get('travel_date')
+        travel_date = self.cleaned_data['travel_date']
 
         if travel_date < date.today():
             raise forms.ValidationError(
-                "Travel date cannot be in the past."
+                "Travel date cannot be in the past. Please select today or a future date."
             )
 
         return travel_date
