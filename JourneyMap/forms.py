@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from datetime import date
 from .models import CurrencyConverter, Enquiry, Blog, Memory, BudgetPlanner, TravelBuddy, TravelCost
 
 class SignupForm(forms.Form):
@@ -130,37 +131,48 @@ class TravelCostForm(forms.ModelForm):
             
         }
              
+
 class TravelBuddyForm(forms.ModelForm):
 
     class Meta:
-
         model = TravelBuddy
 
         fields = [
-
             'destination',
-
             'travel_date',
-
             'budget',
-
             'interest',
-
             'about',
-
             'phone',
-
             'email',
-
         ]
 
         widgets = {
+            'travel_date': forms.DateInput(
+                attrs={
+                    'type': 'date',
+                    'class': 'form-control',
+                    'min': date.today().strftime('%Y-%m-%d')
+                }
+            ),
 
-            'travel_date': forms.DateInput(attrs={'type': 'date'}),
-
-            'about': forms.Textarea(attrs={'rows': 4})
-
+            'about': forms.Textarea(
+                attrs={
+                    'rows': 4,
+                    'class': 'form-control'
+                }
+            ),
         }
+
+    def clean_travel_date(self):
+        travel_date = self.cleaned_data.get('travel_date')
+
+        if travel_date < date.today():
+            raise forms.ValidationError(
+                "Travel date cannot be in the past."
+            )
+
+        return travel_date
         
 class CurrencyConverterForm(forms.ModelForm):
 
